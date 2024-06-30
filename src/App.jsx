@@ -82,7 +82,7 @@ export const ProtectedRouteForAdmin = ({ children }) => {
 
   // console.log(admin.user.email)
 
-  if (admin.user.email === 'knupadhyay784@gmail.com') {
+  if (admin.user.email === 'admin@gmail.com') {
     return children
   }
   else {
