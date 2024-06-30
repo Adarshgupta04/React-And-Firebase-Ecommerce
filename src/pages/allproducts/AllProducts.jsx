@@ -10,6 +10,11 @@ function Allproducts() {
   const context = useContext(myContext)
   const { mode, product, searchkey, setSearchkey, filterType, setFilterType,
     filterPrice, setFilterPrice } = context
+    // console.log("***************************");
+    // console.log(product);
+    // console.log(searchkey);
+    // console.log(filterType);
+    // console.log(filterPrice);
 
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart);
@@ -29,6 +34,14 @@ function Allproducts() {
     window.scrollTo(0, 0)
   }, [])
   
+  console.log("&&&&&&&&&&&&&&&&&&&&&&&&&");
+
+  console.log(product.filter((obj) => {obj.title.toLowerCase().includes(searchkey)}));
+  // product.filter((obj) => obj.title.toLowerCase().includes(searchkey))
+  //             .filter((obj) => obj.category.toLowerCase().includes(filterType))
+  //             .filter((obj) => obj.price.includes(filterPrice)).map((item, index) => {
+  //               console.log(item);
+  //             });
 
   return (
     <Layout>
@@ -41,7 +54,8 @@ function Allproducts() {
           </div>
 
           <div className="flex flex-wrap -m-4">
-            {product.filter((obj) => obj.title.toLowerCase().includes(searchkey))
+            {
+              product.filter((obj) => obj.title.toLowerCase().includes(searchkey))
               .filter((obj) => obj.category.toLowerCase().includes(filterType))
               .filter((obj) => obj.price.includes(filterPrice)).map((item, index) => {
                 const { title, price, description, imageUrl, id } = item;

@@ -15,19 +15,15 @@ function Signup() {
     const context = useContext(myContext);
     const { loading, setLoading } = context;
 
-
     // Firebase functionality
     const signup = async () => {
         setLoading(true)
         if (name === "" || email === "" || password === "") {
             return toast.error("All fields are required")
         }
-
         try {
             const users = await createUserWithEmailAndPassword(auth, email, password);
-
             // console.log(users)
-
             const user = {
                 name: name,
                 uid: users.user.uid,
@@ -41,13 +37,11 @@ function Signup() {
             setEmail("");
             setPassword("");
             setLoading(false)
-
         } catch (error) {
             console.log(error)
             setLoading(false)
         }
     }
-
     return (
         <div className=' flex justify-center items-center h-screen'>
             {loading && <Loader />}

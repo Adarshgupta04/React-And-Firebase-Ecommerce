@@ -10,10 +10,11 @@ import { fireDB } from '../../firebase/FirebaseConfig';
 
 function ProductInfo() {
     const context = useContext(myContext);
-    const { loading, setLoading } = context;
+    const { mode ,loading, setLoading } = context;
 
     const [products, setProducts] = useState('')
     const params = useParams()
+    console.log("Products : " , products)
     // console.log(products.title)
 
     const getProductData = async () => {
@@ -21,6 +22,7 @@ function ProductInfo() {
         try {
             const productTemp = await getDoc(doc(fireDB, "products", params.id))
             // console.log(productTemp)
+            console.log(productTemp.data());
             setProducts(productTemp.data());
             // console.log(productTemp.data())
             setLoading(false)
@@ -30,10 +32,9 @@ function ProductInfo() {
         }
     }
 
-
     useEffect(() => {
+        window.scroll(0,0)
         getProductData()
-
     }, [])
 
 
@@ -44,6 +45,7 @@ function ProductInfo() {
 
     // add to cart
     const addCart = (products) => {
+        console.log();
         dispatch(addToCart(products))
         toast.success('add to cart');
     }
@@ -70,7 +72,7 @@ function ProductInfo() {
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">
                                 BRAND NAME
                             </h2>
-                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1"  style={{ color: mode === 'dark' ? 'white' : '' }}>
                                 {products.title}
                             </h1>
                             <div className="flex mb-4">

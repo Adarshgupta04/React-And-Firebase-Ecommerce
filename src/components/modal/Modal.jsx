@@ -8,7 +8,20 @@ export default function Modal({name, address, pincode, phoneNumber, setName, set
         setIsOpen(false)
     }
     function openModal() {
-        setIsOpen(true)
+
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        console.log("I am inside open Modal");
+
+        console.log(user);
+
+        if(user){
+            setIsOpen(true)
+        }
+        else{
+            window.location.href= "/login";
+        }
+
     }
     return (
         <>
@@ -16,7 +29,6 @@ export default function Modal({name, address, pincode, phoneNumber, setName, set
                 <button
                     type="button"
                     onClick={openModal}
-
                     className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold"
                 >
                     Buy Now
